@@ -1,0 +1,1729 @@
+#%RAML 1.0
+title: member SAPI 2
+
+/members:
+  post:
+    headers:
+      transationid:
+        required: true
+        type: string
+        maxLength: 36
+        minLength: 36
+        example: hdsfhjdh-jxgf859-fgfg4545-ghf5454ghg
+      channel:
+        required: true
+        type: string
+        enum:
+          - mobile
+          - webapp
+        example: "mobile"
+      clientid:
+        required: true
+        type: string
+        example: "ghhhg-uuhjh-bhbhh-ghg"
+      clientsecret: 
+        required: true
+        type: string
+        example: "hghg-hghghjg" 
+      originlanguage:
+        required: true
+        type: string
+        enum:
+          - em
+          - im
+          - ed
+        example: "em"
+      originmarket:
+        required: true
+        type: string
+        enum:
+          - india
+          - US
+          - UK
+        example: "US" 
+    body:
+        application/json:
+          type: object
+          properties:
+            firstname:
+              required: true
+              type: string
+              example: "hghg"
+            lastname:
+              required: false
+              type: string
+              example:  "tytuy"
+            maritalstatus:
+              required: false
+              type: string
+              enum:
+                - married
+                - unmarried
+              example: "married"  
+            title:
+              required: true
+              type: string
+              enum:
+                - mr
+                - mrs
+              example: "mr"
+            gender:
+              required: true
+              type: string
+              enum:
+                - male
+                - female
+              example: "male"
+            occupation:
+              required: false
+              type: string
+              example: "fgfhgkh"
+            registration-channel:
+              required: true
+              type: string
+              enum:
+                - web
+                - mobile
+              example:  "web"
+            prefferedname:
+              required: false
+              type: string
+              example: "gh"
+            identity:
+              required: true
+              type: object
+              properties:
+                password:
+                  required: true
+                  type: string
+                  example: "bjhkghg78"
+                phonecountry:
+                  required: true
+                  type: string
+                  example: "+91"
+                phonenumber:
+                  required: true
+                  type: string
+                  example:  "1234567899"
+                email:
+                  required: true
+                  type: string
+                  example:  "ujggy@hhg.com"
+            address:
+              required: true
+              type: object
+              properties:
+                country:
+                  required: true
+                  type: string
+                  example: "US"
+                city:
+                  required: true
+                  type: string
+                  example: "aasdads"
+                area:
+                  required: true
+                  type: string
+                  example: "tytytlkl"
+                province:
+                  required: true
+                  type: string
+                  example: "wqwq"
+                place-of-residence:
+                  required: true
+                  type: string
+                  example:  "bnbmnbnm"
+          example: {
+            "firstname": "hghg",
+            "lastname": "tytuy",
+            "maritalstatus": "married",  
+            "title": "mr",
+            "gender": "male",
+            "occupation": "fgfhgkh",
+            "registration-channel": "web",
+            "prefferedname": "gh",
+            identity: {
+                "password": "bjhkghg78",
+                "phonecountry": "+91",
+                "phonenumber": "1234567899",
+                "email": "ujggy@hhg.com"},
+            "address": {
+                "country": "US",
+                city: "aasdads",
+                area: "tytytlkl",
+                province: "wqwq",
+                place-of-residence: "bnbmnbnm"}}                        
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            properties:
+              msg:
+                required: true
+                type: string
+                example: "successful operation"
+              code:
+                required: true
+                type: integer
+                example: 200
+              data:
+                required: true
+                type: object
+                properties:
+                  memberid:
+                    required: true
+                    type: string
+                    example: "gfgh7676"
+              success:
+                required: true
+                type: boolean
+                example: true                      
+            example: {
+              "msg": "successful operation",
+              "code": 200,
+              "data": 
+              {memberid: "gfgh7676"},
+              "success": true}                    
+      400:
+        body:
+          application/json:
+            type: object
+            properties:
+              msg:
+                required: true
+                type: string
+                example: "failed operation"
+              code:
+                required: true
+                type: integer
+                example: 400
+              success:
+                required: true
+                type: boolean
+                example: false
+              error:
+                required: true
+                type: object
+                properties:
+                  'type':
+                    required: true
+                    type: string
+                    example: "BAD REQUEST"
+                  title:
+                    required: true
+                    type: string
+                    example: "badrequest"
+                  details:
+                    required: true
+                    type: string
+                    example: "The end point badrequest"
+            example: {
+              msg: "failed operation",
+              code: 400,
+              success: false,
+              error:
+                  { 'type': "BAD REQUEST",
+                  title: "badrequest",
+                  details: "The end point badrequest"}}
+      401:
+        body:
+          application/json:
+            type: object
+            properties:
+              msg:
+                required: true
+                type: string
+                example: "failed operation"
+              code:
+                required: true
+                type: integer
+                example: 401
+              success:
+                required: true
+                type: boolean
+                example: false
+              error:
+                required: true
+                type: object
+                properties:
+                  'type':
+                    required: true
+                    type: string
+                    example: "UNAUTHORISED"
+                  title:
+                    required: true
+                    type: string
+                    example: "unauthorised"
+                  details:
+                    required: true
+                    type: string
+                    example: "The end point badrequest"
+            example: {
+              msg: "failed operation",
+              code: 401,
+              success: false,
+              error:
+                  { 'type': "UNAUTHORISED",
+                  title: "unauthorised",
+                  details: "The end point badrequest"}}                
+      404:
+        body:
+          application/json:
+            type: object
+            properties:
+              msg:
+                required: true
+                type: string
+                example: "failed operation"
+              code:
+                required: true
+                type: integer
+                example: 404
+              success:
+                required: true
+                type: boolean
+                example: false
+              error:
+                required: true
+                type: object
+                properties:
+                  'type':
+                    required: true
+                    type: string
+                    example: "NOTFOUND"
+                  title:
+                    required: true
+                    type: string
+                    example: "notfound"
+                  details:
+                    required: true
+                    type: string
+                    example: "The end point badrequest"
+            example: {
+              msg: "failed operation",
+              code: 404,
+              success: false,
+              error:
+                  { 'type': "NOTFOUND",
+                  title: "notfound",
+                  details: "The end point badrequest"}}                      
+      500:
+        body:
+          application/json:
+            type: object
+            properties:
+              msg:
+                required: true
+                type: string
+                example: "failed operation"
+              code:
+                required: true
+                type: integer
+                example: 500
+              success:
+                required: true
+                type: boolean
+                example: false
+              error:
+                required: true
+                type: object
+                properties:
+                  'type':
+                    required: true
+                    type: string
+                    example: "SERVERERROR"
+                  title:
+                    required: true
+                    type: string
+                    example: "servererror"
+                  details:
+                    required: true
+                    type: string
+                    example: "The end point badrequest"
+            example: {
+              msg: "failed operation",
+              code: 500,
+              success: false,
+              error:
+                  { 'type': "NOTFOUND",
+                  title: "notfound",
+                  details: "The end point badrequest"}}                           
+  get:
+    headers:
+      transationid:
+        required: true
+        type: string
+        maxLength: 36
+        minLength: 36
+        example: hdsfhjdh-jxgf859-fgfg4545-ghf5454ghg
+      channel:
+        required: true
+        type: string
+        enum:
+          - mobile
+          - webapp
+        example: "mobile"
+      clientid:
+        required: true
+        type: string
+        example: "ghhhg-uuhjh-bhbhh-ghg"
+      clientsecret: 
+        required: true
+        type: string
+        example: "hghg-hghghjg" 
+      originlanguage:
+        required: true
+        type: string
+        enum:
+          - em
+          - im
+          - ed
+        example: "em"
+      originmarket:
+        required: true
+        type: string
+        enum:
+          - india
+          - US
+          - UK
+        example: "US"
+    queryParameters:
+    body:
+      application/json:
+        type: object
+        properties:
+          email:
+            required: false
+            type: string
+            example: "hfgdhfj@hjg.com"
+          Mobile:
+            required: false
+            type: string
+            example: "1234567898"
+          registrationdate:
+            required: false
+            type: string
+            example: "1-8-2020"
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            properties:
+              memberlist:
+                required: true
+                items:
+                  properties:
+                    firstname:
+                      required: true
+                      type: string
+                      example: "hghg"
+                    lastname:
+                      required: false
+                      type: string
+                      example:  "tytuy"
+                    maritalstatus:
+                      required: false
+                      type: string
+                      enum:
+                        - married
+                        - unmarried
+                      example: "married"  
+                    title:
+                      required: true
+                      type: string
+                      enum:
+                        - mr
+                        - mrs
+                      example: "mr"
+                    gender:
+                      required: true
+                      type: string
+                      enum:
+                        - male
+                        - female
+                      example: "male"
+                    occupation:
+                      required: false
+                      type: string
+                      example: "fgfhgkh"
+                    registration-channel:
+                      required: true
+                      type: string
+                      enum:
+                        - web
+                        - mobile
+                      example:  "web"
+                    prefferedname:
+                      required: false
+                      type: string
+                      example: "gh"
+                    identity:
+                      required: true
+                      type: object
+                      properties:
+                        password:
+                          required: true
+                          type: string
+                          example: "bjhkghg78"
+                        phonecountry:
+                          required: true
+                          type: string
+                          example: "+91"
+                        phonenumber:
+                          required: true
+                          type: string
+                          example:  "1234567899"
+                        email:
+                          required: true
+                          type: string
+                          example:  "ujggy@hhg.com"
+                    address:
+                      required: true
+                      type: object
+                      properties:
+                        country:
+                          required: true
+                          type: string
+                          example: "US"
+                        city:
+                          required: true
+                          type: string
+                          example: "aasdads"
+                        area:
+                          required: true
+                          type: string
+                          example: "tytytlkl"
+                        province:
+                          required: true
+                          type: string
+                          example: "wqwq"
+                        place-of-residence:
+                          required: true
+                          type: string
+                          example:  "bnbmnbnm"
+            example: { "memberlist":[{ 
+              "firstname": "hghg",
+              "lastname": "tytuy",
+              "maritalstatus": "married",  
+              "title": "mr",
+              "gender": "male",
+              "occupation": "fgfhgkh",
+              "registration-channel": "web",
+              "prefferedname": "gh",
+              identity: {
+                  "password": "bjhkghg78",
+                  "phonecountry": "+91",
+                  "phonenumber": "1234567899",
+                  "email": "ujggy@hhg.com"},
+              "address": {
+                  "country": "US",
+                  city: "aasdads",
+                  area: "tytytlkl",
+                  province: "wqwq",
+                  place-of-residence: "bnbmnbnm"}},],}                        
+      400:
+        body:
+          application/json:
+            type: object
+            properties:
+              msg:
+                required: true
+                type: string
+                example: "failed operation"
+              code:
+                required: true
+                type: integer
+                example: 400
+              success:
+                required: true
+                type: boolean
+                example: false
+              error:
+                required: true
+                type: object
+                properties:
+                  'type':
+                    required: true
+                    type: string
+                    example: "BAD REQUEST"
+                  title:
+                    required: true
+                    type: string
+                    example: "badrequest"
+                  details:
+                    required: true
+                    type: string
+                    example: "The end point badrequest"
+            example: {
+              msg: "failed operation",
+              code: 400,
+              success: false,
+              error:
+                  { 'type': "BAD REQUEST",
+                  title: "badrequest",
+                  details: "The end point badrequest"}}
+      401:
+        body:
+          application/json:
+            type: object
+            properties:
+              msg:
+                required: true
+                type: string
+                example: "failed operation"
+              code:
+                required: true
+                type: integer
+                example: 401
+              success:
+                required: true
+                type: boolean
+                example: false
+              error:
+                required: true
+                type: object
+                properties:
+                  'type':
+                    required: true
+                    type: string
+                    example: "UNAUTHORISED"
+                  title:
+                    required: true
+                    type: string
+                    example: "unauthorised"
+                  details:
+                    required: true
+                    type: string
+                    example: "The end point badrequest"
+            example: {
+              msg: "failed operation",
+              code: 401,
+              success: false,
+              error:
+                  { 'type': "UNAUTHORISED",
+                  title: "unauthorised",
+                  details: "The end point badrequest"}}                
+      404:
+        body:
+          application/json:
+            type: object
+            properties:
+              msg:
+                required: true
+                type: string
+                example: "failed operation"
+              code:
+                required: true
+                type: integer
+                example: 404
+              success:
+                required: true
+                type: boolean
+                example: false
+              error:
+                required: true
+                type: object
+                properties:
+                  'type':
+                    required: true
+                    type: string
+                    example: "NOTFOUND"
+                  title:
+                    required: true
+                    type: string
+                    example: "notfound"
+                  details:
+                    required: true
+                    type: string
+                    example: "The end point badrequest"
+            example: {
+              msg: "failed operation",
+              code: 404,
+              success: false,
+              error:
+                  { 'type': "NOTFOUND",
+                  title: "notfound",
+                  details: "The end point badrequest"}}                      
+      500:
+        body:
+          application/json:
+            type: object
+            properties:
+              msg:
+                required: true
+                type: string
+                example: "failed operation"
+              code:
+                required: true
+                type: integer
+                example: 500
+              success:
+                required: true
+                type: boolean
+                example: false
+              error:
+                required: true
+                type: object
+                properties:
+                  'type':
+                    required: true
+                    type: string
+                    example: "SERVERERROR"
+                  title:
+                    required: true
+                    type: string
+                    example: "servererror"
+                  details:
+                    required: true
+                    type: string
+                    example: "The end point badrequest"
+            example: {
+              msg: "failed operation",
+              code: 500,
+              success: false,
+              error:
+                  { 'type': "NOTFOUND",
+                  title: "notfound",
+                  details: "The end point badrequest"}}                           
+  /{memberid}:
+    patch: 
+      headers:
+        transationid:
+          required: true
+          type: string
+          maxLength: 36
+          minLength: 36
+          example: hdsfhjdh-jxgf859-fgfg4545-ghf5454ghg
+        channel:
+          required: true
+          type: string
+          enum:
+            - mobile
+            - webapp
+          example: "mobile"
+        clientid:
+          required: true
+          type: string
+          example: "ghhhg-uuhjh-bhbhh-ghg"
+        clientsecret: 
+          required: true
+          type: string
+          example: "hghg-hghghjg" 
+        originlanguage:
+          required: true
+          type: string
+          enum:
+            - em
+            - im
+            - ed
+          example: "em"
+        originmarket:
+          required: true
+          type: string
+          enum:
+            - india
+            - US
+            - UK
+          example: "US" 
+      body:
+          application/json:
+            type: object
+            properties:
+              firstname:
+                required: false
+                type: string
+                example: "hghg"
+              lastname:
+                required: false
+                type: string
+                example:  "tytuy"
+              maritalstatus:
+                required: false
+                type: string
+                enum:
+                  - married
+                  - unmarried
+                example: "married"  
+              title:
+                required: false
+                type: string
+                enum:
+                  - mr
+                  - mrs
+                example: "mr"
+              gender:
+                required: false
+                type: string
+                enum:
+                  - male
+                  - female
+                example: "male"
+              occupation:
+                required: false
+                type: string
+                example: "fgfhgkh"
+              registration-channel:
+                required: false
+                type: string
+                enum:
+                  - web
+                  - mobile
+                example:  "web"
+              prefferedname:
+                required: false
+                type: string
+                example: "gh"
+              identity:
+                required: false
+                type: object
+                properties:
+                  password:
+                    required: false
+                    type: string
+                    example: "bjhkghg78"
+                  phonecountry:
+                    required: false
+                    type: string
+                    example: "+91"
+                  phonenumber:
+                    required: false
+                    type: string
+                    example:  "1234567899"
+                  email:
+                    required: false
+                    type: string
+                    example:  "ujggy@hhg.com"
+              address:
+                required: false
+                type: object
+                properties:
+                  country:
+                    required: false
+                    type: string
+                    example: "US"
+                  city:
+                    required: false
+                    type: string
+                    example: "aasdads"
+                  area:
+                    required: false
+                    type: string
+                    example: "tytytlkl"
+                  province:
+                    required: false
+                    type: string
+                    example: "wqwq"
+                  place-of-residence:
+                    required: false
+                    type: string
+                    example:  "bnbmnbnm"
+            example: {
+              "firstname": "hghg",
+              "lastname": "tytuy",
+              "maritalstatus": "married",  
+              "title": "mr",
+              "gender": "male",
+              "occupation": "fgfhgkh",
+              "registration-channel": "web",
+              "prefferedname": "gh",
+              identity: {
+                  "password": "bjhkghg78",
+                  "phonecountry": "+91",
+                  "phonenumber": "1234567899",
+                  "email": "ujggy@hhg.com"},
+              "address": {
+                  "country": "US",
+                  city: "aasdads",
+                  area: "tytytlkl",
+                  province: "wqwq",
+                  place-of-residence: "bnbmnbnm"}}                        
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "successful operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 200
+                data:
+                  required: true
+                  type: object
+                  properties:
+                    memberid:
+                      required: true
+                      type: string
+                      example: "gfgh7676"
+                success:
+                  required: true
+                  type: boolean
+                  example: true                      
+              example: {
+                "msg": "successful operation",
+                "code": 200,
+                "data": 
+                {memberid: "gfgh7676"},
+                "success": true}                    
+        400:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 400
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "BAD REQUEST"
+                    title:
+                      required: true
+                      type: string
+                      example: "badrequest"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 400,
+                success: false,
+                error:
+                    { 'type': "BAD REQUEST",
+                    title: "badrequest",
+                    details: "The end point badrequest"}}
+        401:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 401
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "UNAUTHORISED"
+                    title:
+                      required: true
+                      type: string
+                      example: "unauthorised"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 401,
+                success: false,
+                error:
+                    { 'type': "UNAUTHORISED",
+                    title: "unauthorised",
+                    details: "The end point badrequest"}}                
+        404:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 404
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "NOTFOUND"
+                    title:
+                      required: true
+                      type: string
+                      example: "notfound"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 404,
+                success: false,
+                error:
+                    { 'type': "NOTFOUND",
+                    title: "notfound",
+                    details: "The end point badrequest"}}                      
+        500:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 500
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "SERVERERROR"
+                    title:
+                      required: true
+                      type: string
+                      example: "servererror"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 500,
+                success: false,
+                error:
+                    { 'type': "NOTFOUND",
+                    title: "notfound",
+                    details: "The end point badrequest"}}                           
+    get:
+      headers:
+        transationid:
+          required: true
+          type: string
+          maxLength: 36
+          minLength: 36
+          example: hdsfhjdh-jxgf859-fgfg4545-ghf5454ghg
+        channel:
+          required: true
+          type: string
+          enum:
+            - mobile
+            - webapp
+          example: "mobile"
+        clientid:
+          required: true
+          type: string
+          example: "ghhhg-uuhjh-bhbhh-ghg"
+        clientsecret: 
+          required: true
+          type: string
+          example: "hghg-hghghjg" 
+        originlanguage:
+          required: true
+          type: string
+          enum:
+            - em
+            - im
+            - ed
+          example: "em"
+        originmarket:
+          required: true
+          type: string
+          enum:
+            - india
+            - US
+            - UK
+          example: "US" 
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+              properties:
+                firstname:
+                  required: true
+                  type: string
+                  example: "hghg"
+                lastname:
+                  required: false
+                  type: string
+                  example:  "tytuy"
+                maritalstatus:
+                  required: false
+                  type: string
+                  enum:
+                    - married
+                    - unmarried
+                  example: "married"  
+                title:
+                  required: true
+                  type: string
+                  enum:
+                    - mr
+                    - mrs
+                  example: "mr"
+                gender:
+                  required: true
+                  type: string
+                  enum:
+                    - male
+                    - female
+                  example: "male"
+                occupation:
+                  required: false
+                  type: string
+                  example: "fgfhgkh"
+                registration-channel:
+                  required: true
+                  type: string
+                  enum:
+                    - web
+                    - mobile
+                  example:  "web"
+                prefferedname:
+                  required: false
+                  type: string
+                  example: "gh"
+                identity:
+                  required: true
+                  type: object
+                  properties:
+                    password:
+                      required: true
+                      type: string
+                      example: "bjhkghg78"
+                    phonecountry:
+                      required: true
+                      type: string
+                      example: "+91"
+                    phonenumber:
+                      required: true
+                      type: string
+                      example:  "1234567899"
+                    email:
+                      required: true
+                      type: string
+                      example:  "ujggy@hhg.com"
+                address:
+                  required: true
+                  type: object
+                  properties:
+                    country:
+                      required: true
+                      type: string
+                      example: "US"
+                    city:
+                      required: true
+                      type: string
+                      example: "aasdads"
+                    area:
+                      required: true
+                      type: string
+                      example: "tytytlkl"
+                    province:
+                      required: true
+                      type: string
+                      example: "wqwq"
+                    place-of-residence:
+                      required: true
+                      type: string
+                      example:  "bnbmnbnm"
+              example: {
+                firstname: "hghg",
+                "lastname": "tytuy",
+                "maritalstatus": "married",  
+                "title": "mr",
+                "gender": "male",
+                "occupation": "fgfhgkh",
+                "registration-channel": "web",
+                "prefferedname": "gh",
+                identity: {
+                    "password": "bjhkghg78",
+                    "phonecountry": "+91",
+                    "phonenumber": "1234567899",
+                    "email": "ujggy@hhg.com"},
+                "address": {
+                    "country": "US",
+                    city: "aasdads",
+                    area: "tytytlkl",
+                    province: "wqwq",
+                    place-of-residence: "bnbmnbnm"}}                        
+        400:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 400
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "BAD REQUEST"
+                    title:
+                      required: true
+                      type: string
+                      example: "badrequest"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 400,
+                success: false,
+                error:
+                    { 'type': "BAD REQUEST",
+                    title: "badrequest",
+                    details: "The end point badrequest"}}
+        401:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 401
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "UNAUTHORISED"
+                    title:
+                      required: true
+                      type: string
+                      example: "unauthorised"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 401,
+                success: false,
+                error:
+                    { 'type': "UNAUTHORISED",
+                    title: "unauthorised",
+                    details: "The end point badrequest"}}                
+        404:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 404
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "NOTFOUND"
+                    title:
+                      required: true
+                      type: string
+                      example: "notfound"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 404,
+                success: false,
+                error:
+                    { 'type': "NOTFOUND",
+                    title: "notfound",
+                    details: "The end point badrequest"}}                      
+        500:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 500
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "SERVERERROR"
+                    title:
+                      required: true
+                      type: string
+                      example: "servererror"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 500,
+                success: false,
+                error:
+                    { 'type': "NOTFOUND",
+                    title: "notfound",
+                    details: "The end point badrequest"}}                           
+  /sync:  
+    post:
+      headers: 
+        transationid:
+          required: true
+          type: string
+          maxLength: 36
+          minLength: 36
+          example: hdsfhjdh-jxgf859-fgfg4545-ghf5454ghg
+        channel:
+          required: true
+          type: string
+          enum:
+            - mobile
+            - webapp
+          example: "mobile"
+        clientid:
+          required: true
+          type: string
+          example: "ghhhg-uuhjh-bhbhh-ghg"
+        clientsecret: 
+          required: true
+          type: string
+          example: "hghg-hghghjg" 
+        originlanguage:
+          required: true
+          type: string
+          enum:
+            - em
+            - im
+            - ed
+          example: "em"
+        originmarket:
+          required: true
+          type: string
+          enum:
+            - india
+            - US
+            - UK
+          example: "US" 
+      body:
+          application/json:
+            type: object
+            properties:
+              firstname:
+                required: true
+                type: string
+                example: "hghg"
+              lastname:
+                required: false
+                type: string
+                example:  "tytuy"
+              maritalstatus:
+                required: false
+                type: string
+                enum:
+                  - married
+                  - unmarried
+                example: "married"  
+              title:
+                required: true
+                type: string
+                enum:
+                  - mr
+                  - mrs
+                example: "mr"
+              gender:
+                required: true
+                type: string
+                enum:
+                  - male
+                  - female
+                example: "male"
+              occupation:
+                required: false
+                type: string
+                example: "fgfhgkh"
+              registration-channel:
+                required: true
+                type: string
+                enum:
+                  - web
+                  - mobile
+                example:  "web"
+              prefferedname:
+                required: false
+                type: string
+                example: "gh"
+              identity:
+                required: true
+                type: object
+                properties:
+                  password:
+                    required: true
+                    type: string
+                    example: "bjhkghg78"
+                  phonecountry:
+                    required: true
+                    type: string
+                    example: "+91"
+                  phonenumber:
+                    required: true
+                    type: string
+                    example:  "1234567899"
+                  email:
+                    required: true
+                    type: string
+                    example:  "ujggy@hhg.com"
+              address:
+                required: true
+                type: object
+                properties:
+                  country:
+                    required: true
+                    type: string
+                    example: "US"
+                  city:
+                    required: true
+                    type: string
+                    example: "aasdads"
+                  area:
+                    required: true
+                    type: string
+                    example: "tytytlkl"
+                  province:
+                    required: true
+                    type: string
+                    example: "wqwq"
+                  place-of-residence:
+                    required: true
+                    type: string
+                    example:  "bnbmnbnm"
+            example: {
+              "firstname": "hghg",
+              "lastname": "tytuy",
+              "maritalstatus": "married",  
+              "title": "mr",
+              "gender": "male",
+              "occupation": "fgfhgkh",
+              "registration-channel": "web",
+              "prefferedname": "gh",
+              identity: {
+                  "password": "bjhkghg78",
+                  "phonecountry": "+91",
+                  "phonenumber": "1234567899",
+                  "email": "ujggy@hhg.com"},
+              "address": {
+                  "country": "US",
+                  city: "aasdads",
+                  area: "tytytlkl",
+                  province: "wqwq",
+                  place-of-residence: "bnbmnbnm"}}                        
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "successful operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 200
+                data:
+                  required: true
+                  type: object
+                  properties:
+                    memberid:
+                      required: true
+                      type: string
+                      example: "gfgh7676"
+                success:
+                  required: true
+                  type: boolean
+                  example: true                      
+              example: {
+                "msg": "successful operation",
+                "code": 200,
+                "data": 
+                {memberid: "gfgh7676"},
+                "success": true}                    
+        400:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 400
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "BAD REQUEST"
+                    title:
+                      required: true
+                      type: string
+                      example: "badrequest"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 400,
+                success: false,
+                error:
+                    { 'type': "BAD REQUEST",
+                    title: "badrequest",
+                    details: "The end point badrequest"}}
+        401:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 401
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "UNAUTHORISED"
+                    title:
+                      required: true
+                      type: string
+                      example: "unauthorised"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 401,
+                success: false,
+                error:
+                    { 'type': "UNAUTHORISED",
+                    title: "unauthorised",
+                    details: "The end point badrequest"}}                
+        404:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 404
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "NOTFOUND"
+                    title:
+                      required: true
+                      type: string
+                      example: "notfound"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 404,
+                success: false,
+                error:
+                    { 'type': "NOTFOUND",
+                    title: "notfound",
+                    details: "The end point badrequest"}}                      
+        500:
+          body:
+            application/json:
+              type: object
+              properties:
+                msg:
+                  required: true
+                  type: string
+                  example: "failed operation"
+                code:
+                  required: true
+                  type: integer
+                  example: 500
+                success:
+                  required: true
+                  type: boolean
+                  example: false
+                error:
+                  required: true
+                  type: object
+                  properties:
+                    'type':
+                      required: true
+                      type: string
+                      example: "SERVERERROR"
+                    title:
+                      required: true
+                      type: string
+                      example: "servererror"
+                    details:
+                      required: true
+                      type: string
+                      example: "The end point badrequest"
+              example: {
+                msg: "failed operation",
+                code: 500,
+                success: false,
+                error:
+                    { 'type': "NOTFOUND",
+                    title: "notfound",
+                    details: "The end point badrequest"}}                           
+
+
+                      
+                      
+                    
+
+
+                          
+                              
+                              
+                          
+                        
+
+
+                        
+                      
+                          
+                     
+
+                      
+                       
+                     
+
+              
+                  
+  
+
